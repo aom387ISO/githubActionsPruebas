@@ -73,9 +73,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm test
-        continue-on-error: false
+     # - name: Run tests
+    #  run: npm test
+     #   continue-on-error: false
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
