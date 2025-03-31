@@ -6,7 +6,6 @@ on:
     types:
       - completed
 
-
 permissions:
   contents: read
   pages: write
@@ -26,33 +25,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Set up Node.js to run your tests
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Call common workflow
+        uses: ./.github/workflows/common.yml
         with:
-          node-version: "16" # O cualquier versión que uses en tu proyecto
+          node-version: "16"
 
-      # Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Run tests
-      - name: Run tests
-        run: npm test
-        continue-on-error: false # Esto asegurará que el flujo se detenga si los tests fallan
-
-      # If tests pass, deploy the app
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        if: success() # Solo ejecuta este paso si los tests son exitosos
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: "."
-        if: success() # Solo ejecuta este paso si los tests son exitosos
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        if: success() # Solo ejecuta este paso si los tests son exitosos
