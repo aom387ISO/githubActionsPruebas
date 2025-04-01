@@ -1,10 +1,21 @@
-import { defineConfig } from "eslint/config";
+import { defineConfig, globalIgnores } from "eslint/config";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
 
+
 export default defineConfig([
-  { files: ["**/*.{js,mjs,cjs,ts}"] },
-  { files: ["**/*.{js,mjs,cjs,ts}"], languageOptions: { globals: globals.browser } },
+  [globalIgnores(["**/test.js", "**/buzz.min.js", "**/jquery-3.1.1.min.js"])],
+  { 
+    files: ["**/*.{js,mjs,cjs,ts}"],
+  },
+  { 
+    files: ["**/*.{js,mjs,cjs,ts}"], 
+    languageOptions: { globals: globals.browser },
+  },
   tseslint.configs.recommended,
+  {
+    ignores: ["buzz.min.js", "jquery-3.1.1.min.js", "bird.js", "menu.js", "buzz.min.js", "test.js"],
+  },
 ]);
+
