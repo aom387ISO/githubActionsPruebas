@@ -12,10 +12,6 @@ export default defineConfig([
   { 
     files: ["**/*.{js,mjs,cjs,ts}"], 
     languageOptions: { globals: globals.browser },
-  },
-  tseslint.configs.recommended,
-  {
-    ignores: ["buzz.min.js", "jquery-3.1.1.min.js", "bird.js", "menu.js", "buzz.min.js", "test.js"],
-  },
+  }
 ]);
 
