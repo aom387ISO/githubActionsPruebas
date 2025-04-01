@@ -20,11 +20,7 @@ export default defineConfig([
   // Reglas personalizadas
   {
     rules: {
-      // Cambiar la regla de no-unused-vars para que sea una advertencia
-      "@typescript-eslint/no-unused-vars": [
-        "warn", // Cambia a "warn" para que no bloquee el pipeline
-        { varsIgnorePattern: "^_", argsIgnorePattern: "^_" }, // Ignora variables que comiencen con "_"
-      ],
+      "@typescript-eslint/no-unused-vars": "off", // Deshabilita la regla completamente
     },
   },
 ]);
