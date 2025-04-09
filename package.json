@@ -4,7 +4,8 @@
   "description": "## INSTRUCCIONES",
   "main": "index.js",
   "scripts": {
-    "test": "npx jest"
+    "test": "npx jest",
+    "docs": "npx jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "globals": "^16.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "jsdoc": "^4.0.4",
     "jsdom": "^26.0.0",
     "jsdom-global": "^3.0.2",
     "typescript-eslint": "^8.28.0"
