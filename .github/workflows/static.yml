@@ -21,12 +21,15 @@ jobs:
     name: Setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: "20"
           cache: "npm"
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
       - name: Cache dependencies
         uses: actions/cache/save@v4
         with:
@@ -40,28 +43,57 @@ jobs:
     name: Lint Code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache/restore@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache/restore@v4
         with:
           path: |
             node_modules
             ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - run: npm run lint
+      - name: Run Linter
+        run: npm run lint
 
   test:
     needs: setup
     name: Run Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache/restore@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache/restore@v4
         with:
           path: |
             node_modules
             ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - run: npm test
+      - name: Run Tests
+        run: npm test
+
+  docs:
+    needs: setup
+    name: Generate Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            node_modules
+            ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: Generate Documentation
+        run: npm run docs:build
+      - name: Upload Documentation artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation
+          path: /docs
+          retention-days: 1
 
   deploy:
     needs: [lint, test]
