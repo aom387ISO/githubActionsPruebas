@@ -4,7 +4,14 @@ import tseslint from "typescript-eslint";
 
 export default defineConfig([
   // Ignorar archivos específicos globalmente
-  [globalIgnores(["**/test.js", "**/buzz.min.js", "**/jquery-3.1.1.min.js"])],
+  [
+    globalIgnores([
+      "**/test.js",
+      "**/buzz.min.js",
+      "**/jquery-3.1.1.min.js",
+      "**/docs/**",
+    ]),
+  ],
 
   // Configuración para todos los archivos JavaScript y TypeScript
   {
