@@ -87,7 +87,7 @@ jobs:
             ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - name: Generate Documentation
-        run: npm run docs:build
+        run: npm run docs
       - name: Upload Documentation artifact
         uses: actions/upload-artifact@v4
         with:
